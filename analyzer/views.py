@@ -210,14 +210,12 @@ def ask_question(request):
                 "answer": "Upload resume first."
             })
 
-        chunks, index = process_resume(
-            text
-        )
+        chunks, index = process_resume(text)
 
         answer = ask_resume_question(
-            question,
-            chunks,
-            index
+        question,
+        chunks,
+        index
         )
 
         return JsonResponse({

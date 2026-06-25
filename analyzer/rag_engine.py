@@ -11,21 +11,23 @@ model = SentenceTransformer(
 )
 
 
+VECTOR_CACHE = {}
+
 def process_resume(text):
 
-    chunks = create_chunks(
-        text
-    )
+    if text in VECTOR_CACHE:
+        return VECTOR_CACHE[text]
 
-    embeddings = generate_embeddings(
-        chunks
-    )
+    chunks = create_chunks(text)
 
-    index = create_vector_store(
-        embeddings
-    )
+    embeddings = generate_embeddings(chunks)
+
+    index = create_vector_store(embeddings)
+
+    VECTOR_CACHE[text] = (chunks, index)
 
     return chunks, index
+
 
 
 def ask_resume_question(
