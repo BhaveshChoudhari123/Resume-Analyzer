@@ -7,8 +7,7 @@ An AI-powered Resume Analyzer built using **Django**, **Groq LLM**, **FAISS**, a
 # 🌐 Live Demo
 
 **Website:**
-web-production-1c408.up.railway.app
----
+https://web-production-1c408.up.railway.app/accounts/login/
 
 # ✨ Features
 
@@ -54,7 +53,6 @@ web-production-1c408.up.railway.app
 * HTML
 * CSS
 * Bootstrap
-* JavaScript
 
 ## Deployment
 
@@ -71,7 +69,7 @@ web-production-1c408.up.railway.app
 Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/Resume-Analyzer.git
+git clone (https://github.com/BhaveshChoudhari123/Resume-Analyzer)
 ```
 
 Move into the project
@@ -138,8 +136,6 @@ EMAIL_HOST_PASSWORD=your_gmail_app_password_here
 HF_API_TOKEN=your_huggingface_token_here
 ```
 
-**⚠️ Never upload your real API keys or passwords to GitHub.**
-
 ---
 
 # 📸 Screenshots
@@ -152,12 +148,23 @@ Example:
 screenshots/
 │
 ├── home.png
+<img width="1918" height="1023" alt="home page" src="https://github.com/user-attachments/assets/cfedd218-0511-4870-9d1a-804f98625e01" />
+
 ├── login.png
+<img width="1918" height="1020" alt="login" src="https://github.com/user-attachments/assets/f072a523-eb94-46f7-ae62-6c5ba9116382" />
+
 ├── register.png
-├── upload.png
+<img width="1917" height="1012" alt="image" src="https://github.com/user-attachments/assets/45907ac8-1e9f-451c-84d7-a30d79b9e720" />
+
 ├── analysis.png
+<img width="1918" height="1020" alt="analysis" src="https://github.com/user-attachments/assets/705c18c5-ecd1-4d09-9f36-61a50458e5f9" />
+
 ├── chatbot.png
-├── report.png
+<img width="1918" height="922" alt="chatbot" src="https://github.com/user-attachments/assets/f6948c67-d1e8-4862-90f5-484323ffb9bd" />
+
+├── improvement.png
+<img width="1918" height="1008" alt="improvement" src="https://github.com/user-attachments/assets/962b1acf-e75c-4d57-8eae-bea4060c92f1" />
+
 ```
 
 ---
@@ -197,4 +204,4 @@ This project is licensed under the MIT License.
 Aspiring Full Stack Python & AI Developer
 
 * GitHub: https://github.com/BhaveshChoudhari123
-* LinkedIn: *(Add your LinkedIn profile URL here)*
+* LinkedIn: https://www.linkedin.com/in/bhaveshchoudhari/
