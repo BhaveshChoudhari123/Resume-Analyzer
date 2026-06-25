@@ -7,8 +7,7 @@ An AI-powered Resume Analyzer built using **Django**, **Groq LLM**, **FAISS**, a
 # 🌐 Live Demo
 
 **Website:**
-https://YOUR-RAILWAY-URL.up.railway.app
-
+web-production-1c408.up.railway.app
 ---
 
 # ✨ Features
@@ -63,22 +62,6 @@ https://YOUR-RAILWAY-URL.up.railway.app
 
 ---
 
-# 📂 Project Structure
-
-```text
-Resume-Analyzer/
-│
-├── analyzer/
-├── accounts/
-├── resume_analyzer/
-├── templates/
-├── static/
-├── media/
-├── requirements.txt
-├── runtime.txt
-├── manage.py
-├── README.md
-└── .gitignore
 ```
 
 ---
