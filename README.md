@@ -142,50 +142,59 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ## 🏠 Home Page
 
-![Home](screenshots/<img width="1918" height="1023" alt="home" src="https://github.com/user-attachments/assets/45f4073e-5979-45f7-9121-178eaa16a425" />
-)
+[Home]
+
+<img width="1918" height="1023" alt="home" src="https://github.com/user-attachments/assets/45f4073e-5979-45f7-9121-178eaa16a425" />
 
 ---
 
 ## 🔐 Login Page
 
-![Login](screenshots/<img width="1918" height="1020" alt="login" src="https://github.com/user-attachments/assets/2896d3e7-e20e-4840-9804-c3b5dfc9760f" />
-)
+[Login]
+
+<img width="1918" height="1020" alt="login" src="https://github.com/user-attachments/assets/2896d3e7-e20e-4840-9804-c3b5dfc9760f" />
 
 ---
 
 ## 📝 Register Page
 
-![Register](screenshots/<img width="1918" height="1013" alt="register" src="https://github.com/user-attachments/assets/88f06f2d-1b57-4e52-b2fb-933f10fd7d54" />
-)
+[Register]
+
+<img width="1918" height="1013" alt="register" src="https://github.com/user-attachments/assets/88f06f2d-1b57-4e52-b2fb-933f10fd7d54" />
 
 ---
 
 ## 🤖 AI Resume Analysis
 
-![Analysis](screenshots/<img width="1918" height="1020" alt="analysis" src="https://github.com/user-attachments/assets/d1d9288e-e128-48cd-a642-b70c51987fe3" />
-)
+[Analysis]
+
+<img width="1918" height="1020" alt="analysis" src="https://github.com/user-attachments/assets/d1d9288e-e128-48cd-a642-b70c51987fe3" />
 
 ---
 
 ## 💬 RAG Chatbot
 
-![Chatbot](screenshots/<img width="1918" height="922" alt="chatbot" src="https://github.com/user-attachments/assets/8b23199f-4333-4f06-8b0b-4a391694e4f5" />
-)
+[Chatbot]
+
+<img width="1918" height="922" alt="chatbot" src="https://github.com/user-attachments/assets/8b23199f-4333-4f06-8b0b-4a391694e4f5" />
 
 ---
 
 ## 🎯 Job Match
 
-![Job Match](screenshots/<img width="1918" height="1023" alt="job_match" src="https://github.com/user-attachments/assets/c6e25756-0d79-452b-9415-bfa233533c73" />
-)
+[Job Match]
+
+<img width="1918" height="1023" alt="job_match" src="https://github.com/user-attachments/assets/c6e25756-0d79-452b-9415-bfa233533c73" />
+
 
 ---
 
 ## 📑 PDF Report
 
-![PDF](screenshots/<img width="997" height="838" alt="report" src="https://github.com/user-attachments/assets/7af8d3e2-c904-4c65-ac54-fe9bbd45970d" />
-)
+[PDF]
+
+<img width="997" height="838" alt="report" src="https://github.com/user-attachments/assets/7af8d3e2-c904-4c65-ac54-fe9bbd45970d" />
+
 
 ``
 
