@@ -1,260 +1,217 @@
 # 🚀 AI Resume Analyzer with RAG Chatbot
 
-An AI-powered Resume Analysis Platform built using Django, Groq AI, LangChain, FAISS, and Sentence Transformers.
-
-The system analyzes resumes, calculates ATS scores, identifies missing skills, recommends job roles, generates interview questions, creates PDF reports, and includes a RAG-powered chatbot that can answer questions about any uploaded resume.
+An AI-powered Resume Analyzer built using **Django**, **Groq LLM**, **FAISS**, and **PostgreSQL**. The application analyzes resumes, calculates ATS scores, recommends jobs, generates interview questions, provides AI-powered resume improvement suggestions, and includes a Retrieval-Augmented Generation (RAG) chatbot that answers questions based on the uploaded resume.
 
 ---
 
-## 📌 Features
+# 🌐 Live Demo
 
-### 🤖 AI Resume Analysis
-- Resume Score Calculation
-- ATS Score Evaluation
-- Resume Level Detection
-- Resume Summary Generation
-
-### 💻 Skill Analysis
-- Extract Skills from Resume
-- Detect Missing Skills
-- Suggest Skill Improvements
-- Strength & Weakness Analysis
-
-### 🎯 Career Guidance
-- Recommended Job Roles
-- Personalized Suggestions
-- Technical Interview Questions
-
-### 📄 PDF Report Generator
-- Download Complete Analysis Report
-- Professional PDF Format
-
-### 🔐 User Authentication
-- User Registration
-- Login & Logout
-- Resume History Tracking
-
-### 🧠 RAG Resume Chatbot
-- Ask questions about uploaded resumes
-- Semantic Search using FAISS
-- Resume Embeddings using Sentence Transformers
-- Context-Aware Responses using Groq LLM
-
-Examples:
-
-- What projects has the candidate built?
-- What skills are mentioned?
-- What is the educational background?
-- What technologies has the candidate used?
-- Summarize the resume
+**Website:**
+https://YOUR-RAILWAY-URL.up.railway.app
 
 ---
 
-##Images:
+# ✨ Features
 
-1.Login Page:
-
-<img width="1918" height="1025" alt="login page" src="https://github.com/user-attachments/assets/a2138ea5-25bf-40ea-b2af-dade767ad50e" />
-
-2.Forgotten Password reset:
-
-<img width="1918" height="1017" alt="forgot password" src="https://github.com/user-attachments/assets/c741a182-7655-4571-b02d-ec215b2891a3" />
-
-3.Dashboard:
-
-<img width="1918" height="1013" alt="dashboard" src="https://github.com/user-attachments/assets/98da34eb-46c6-4648-8e2a-e1c75fa103d3" />
-
-4.Resume score, Detected skills, Missing skills, recommended jobs, interview questions, strengths, weaknesses, suggestions, AI job matcher showing all these after uploading resume:
-
-<img width="1918" height="1020" alt="resume score" src="https://github.com/user-attachments/assets/9f80ebe9-77b3-48af-92e9-e0556f639ef0" />
-
-5.AI chatbot- Resume related questions:
-
-<img width="1918" height="1017" alt="Rag chatbot" src="https://github.com/user-attachments/assets/9e36a911-2441-43d0-9945-80a7f2983c16" />
-
-
-
-
-
-## 🏗️ Tech Stack
-
-### Backend
-- Python
-- Django
-
-### Frontend
-- HTML
-- CSS
-- Bootstrap
-
-### Database
-- SQLite (Development)
-- PostgreSQL (Deployment Ready)
-
-### AI & RAG
-- Groq API
-- LangChain
-- FAISS
-- Sentence Transformers
-- all-MiniLM-L6-v2
-
-### Reports
-- ReportLab PDF Generator
-
-### Authentication
-- Django Authentication System
+* 👤 User Registration & Login
+* 📄 Upload PDF Resume
+* 🤖 AI Resume Analysis
+* 📊 ATS Score Calculation
+* ⭐ Resume Score
+* 🧠 Skill Extraction
+* ❌ Missing Skills Detection
+* 💼 AI Job Recommendations
+* 💪 Resume Strengths & Weaknesses
+* 💡 AI Resume Improvement Suggestions
+* 🎤 AI Interview Questions
+* 🔍 RAG Resume Chatbot
+* 📑 Download PDF Resume Report
+* 📜 Resume History
+* 🗄 PostgreSQL Database
+* ☁ Railway Deployment
 
 ---
 
-## 🧠 RAG Architecture
+# 🛠 Tech Stack
 
-Resume PDF
-↓
-Text Extraction
-↓
-Text Chunking
-↓
-Sentence Embeddings
-↓
-FAISS Vector Database
-↓
-Semantic Search
-↓
-Groq LLM
-↓
-Answer Generation
+## Backend
+
+* Python
+* Django
+* Django REST Framework
+
+## Artificial Intelligence
+
+* Groq LLM
+* RAG (Retrieval-Augmented Generation)
+* FAISS Vector Database
+
+## Database
+
+* PostgreSQL
+
+## Frontend
+
+* HTML
+* CSS
+* Bootstrap
+* JavaScript
+
+## Deployment
+
+* Railway
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
-resume_analyzer/
+Resume-Analyzer/
 │
-├── accounts/
 ├── analyzer/
-│   ├── ai_engine.py
-│   ├── rag_engine.py
-│   ├── pdf_generator.py
-│   ├── views.py
-│   └── models.py
-│
+├── accounts/
+├── resume_analyzer/
 ├── templates/
-├── media/
 ├── static/
-├── manage.py
+├── media/
 ├── requirements.txt
-└── README.md
+├── runtime.txt
+├── manage.py
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-## ⚙️ Installation
+# 🚀 Installation
 
-### Clone Repository
+Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/resume-analyzer.git
-cd resume-analyzer
+git clone https://github.com/YOUR_GITHUB_USERNAME/Resume-Analyzer.git
 ```
 
-### Create Virtual Environment
+Move into the project
+
+```bash
+cd Resume-Analyzer
+```
+
+Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Environment
+Activate Virtual Environment
 
-Windows
+### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-Linux / Mac
+### Linux / macOS
 
 ```bash
 source venv/bin/activate
 ```
 
-### Install Dependencies
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## 🔑 Environment Variables
-
-Create a .env file
-
-```env
-GROQ_API_KEY=your_groq_api_key
-```
-
----
-
-## 🚀 Run Project
+Run migrations
 
 ```bash
 python manage.py migrate
 ```
 
+Start the server
+
 ```bash
 python manage.py runserver
 ```
 
-Open:
+---
 
-```text
-http://127.0.0.1:8000
+# 🔐 Environment Variables
+
+Create a `.env` file in the project root and add the following variables.
+
+```env
+SECRET_KEY=your_secret_key_here
+
+DATABASE_URL=your_database_url_here
+
+GROQ_API_KEY=your_groq_api_key_here
+
+EMAIL_HOST_USER=your_email@example.com
+
+EMAIL_HOST_PASSWORD=your_gmail_app_password_here
+
+HF_API_TOKEN=your_huggingface_token_here
+```
+
+**⚠️ Never upload your real API keys or passwords to GitHub.**
+
+---
+
+# 📸 Screenshots
+
+Add screenshots inside a folder named **screenshots**.
+
+Example:
+
+```
+screenshots/
+│
+├── home.png
+├── login.png
+├── register.png
+├── upload.png
+├── analysis.png
+├── chatbot.png
+├── report.png
 ```
 
 ---
 
-## 📈 Future Enhancements
+# 🚀 Future Improvements
 
-- Multi Resume Comparison
-- Resume vs Job Description Matching
-- AI Cover Letter Generator
-- LinkedIn Profile Analyzer
-- Resume Ranking System
-- Recruiter Dashboard
-- PostgreSQL Production Database
-- Docker Deployment
+* Voice AI Interview Assistant
+* Resume Comparison
+* AI Career Roadmap Generator
+* Recruiter Dashboard
+* Resume Version History
+* Multi-language Resume Analysis
 
 ---
 
-## 🎯 Learning Outcomes
+# 🤝 Contributing
 
-This project demonstrates:
+Contributions, suggestions, and improvements are welcome.
 
-- Python Development
-- Django Development
-- Authentication System
-- REST Concepts
-- AI Integration
-- Retrieval-Augmented Generation (RAG)
-- Vector Databases
-- Semantic Search
-- Prompt Engineering
-- PDF Generation
-- Full Stack Development
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a Pull Request
 
 ---
 
-## 👨‍💻 Author
+# 📄 License
 
-Bhavesh Choudhari
-
-Python Developer | Backend Developer
-
-LinkedIn:
-[https://linkedin.com/in/bhaveshchoudhari](https://www.linkedin.com/in/bhaveshchoudhari/)
-
-GitHub:
-[https://github.com/bhaveshchoudhari](https://github.com/BhaveshChoudhari123?tab=repositories)
+This project is licensed under the MIT License.
 
 ---
+
+# 👨‍💻 Author
+
+**Bhavesh Choudhari**
+
+Aspiring Full Stack Python & AI Developer
+
+* GitHub: https://github.com/BhaveshChoudhari123
+* LinkedIn: *(Add your LinkedIn profile URL here)*
