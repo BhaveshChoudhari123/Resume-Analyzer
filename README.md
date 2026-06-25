@@ -140,32 +140,54 @@ HF_API_TOKEN=your_huggingface_token_here
 
 # 📸 Screenshots
 
-Add screenshots inside a folder named **screenshots**.
+## 🏠 Home Page
 
-Example:
+![Home](screenshots/<img width="1918" height="1023" alt="home" src="https://github.com/user-attachments/assets/45f4073e-5979-45f7-9121-178eaa16a425" />
+)
 
-```
-screenshots/
-│
-├── home.png
-<img width="1918" height="1023" alt="home page" src="https://github.com/user-attachments/assets/cfedd218-0511-4870-9d1a-804f98625e01" />
+---
 
-├── login.png
-<img width="1918" height="1020" alt="login" src="https://github.com/user-attachments/assets/f072a523-eb94-46f7-ae62-6c5ba9116382" />
+## 🔐 Login Page
 
-├── register.png
-<img width="1917" height="1012" alt="image" src="https://github.com/user-attachments/assets/45907ac8-1e9f-451c-84d7-a30d79b9e720" />
+![Login](screenshots/<img width="1918" height="1020" alt="login" src="https://github.com/user-attachments/assets/2896d3e7-e20e-4840-9804-c3b5dfc9760f" />
+)
 
-├── analysis.png
-<img width="1918" height="1020" alt="analysis" src="https://github.com/user-attachments/assets/705c18c5-ecd1-4d09-9f36-61a50458e5f9" />
+---
 
-├── chatbot.png
-<img width="1918" height="922" alt="chatbot" src="https://github.com/user-attachments/assets/f6948c67-d1e8-4862-90f5-484323ffb9bd" />
+## 📝 Register Page
 
-├── improvement.png
-<img width="1918" height="1008" alt="improvement" src="https://github.com/user-attachments/assets/962b1acf-e75c-4d57-8eae-bea4060c92f1" />
+![Register](screenshots/<img width="1918" height="1013" alt="register" src="https://github.com/user-attachments/assets/88f06f2d-1b57-4e52-b2fb-933f10fd7d54" />
+)
 
-```
+---
+
+## 🤖 AI Resume Analysis
+
+![Analysis](screenshots/<img width="1918" height="1020" alt="analysis" src="https://github.com/user-attachments/assets/d1d9288e-e128-48cd-a642-b70c51987fe3" />
+)
+
+---
+
+## 💬 RAG Chatbot
+
+![Chatbot](screenshots/<img width="1918" height="922" alt="chatbot" src="https://github.com/user-attachments/assets/8b23199f-4333-4f06-8b0b-4a391694e4f5" />
+)
+
+---
+
+## 🎯 Job Match
+
+![Job Match](screenshots/<img width="1918" height="1023" alt="job_match" src="https://github.com/user-attachments/assets/c6e25756-0d79-452b-9415-bfa233533c73" />
+)
+
+---
+
+## 📑 PDF Report
+
+![PDF](screenshots/<img width="997" height="838" alt="report" src="https://github.com/user-attachments/assets/7af8d3e2-c904-4c65-ac54-fe9bbd45970d" />
+)
+
+``
 
 ---
 
