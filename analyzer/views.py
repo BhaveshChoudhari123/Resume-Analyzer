@@ -5,6 +5,12 @@ from .rag_engine import (
     ask_resume_question
 )
 
+
+
+from .pipelines.resume_validation_pipeline import (
+    validate_resume_content
+)
+
 from django.contrib.auth.decorators import login_required
 
 from .pipelines.job_match_pipeline import (
@@ -19,7 +25,8 @@ from .utils import (
     extract_text_from_pdf,
     calculate_resume_score,
     calculate_ats_score,
-    get_resume_level
+    get_resume_level,
+    generate_resume_hash
 )
 
 from .ai_engine import analyze_resume_with_ai
@@ -37,101 +44,158 @@ def upload_resume(request):
 
         uploaded_file = request.FILES.get("resume")
 
-        if uploaded_file:
-
-            Resume.objects.create(
-                user=request.user,
-                resume_file=uploaded_file
-            )
-
-            text = extract_text_from_pdf(uploaded_file)
-
-            # DEBUG OUTPUT
-            print("\n\n========== RESUME TEXT ==========\n")
-            print(text)
-            print("\n=================================\n")
-
-            chunks, index = process_resume(text)
-
-            print("\n\n========== CHUNKS ==========\n")
-            print(chunks)
-            print("\n============================\n")
-
-            
-
-            request.session["resume_text"] = text
-
-            ai_result = analyze_resume_with_ai(text)
-
-            skills = ai_result.get("skills", [])
-            missing_skills = ai_result.get("missing_skills", [])
-            recommended_jobs = ai_result.get("recommended_jobs", [])
-            strengths = ai_result.get("strengths", [])
-            weaknesses = ai_result.get("weaknesses", [])
-            suggestions = ai_result.get("suggestions", [])
-            resume_summary = ai_result.get("resume_summary", "")
-            interview_questions = ai_result.get("interview_questions", [])
-            job_match = ai_result.get("job_match",[])
-
-            score = calculate_resume_score(
-                text,
-                skills
-            )
-
-            ats_score = calculate_ats_score(text)
-
-            resume_level = get_resume_level(score)
-
-            skills_count = len(skills)
-            missing_count = len(missing_skills)
-
-            total_skills = skills_count + missing_count
-
-            if total_skills > 0:
-                skill_percentage = int(
-                    (skills_count / total_skills) * 100
-                )
-            else:
-                skill_percentage = 0
-
-            latest_report = {
-                "score": score,
-                "ats_score": ats_score,
-                "resume_level": resume_level,
-                "skills": skills,
-                "missing_skills": missing_skills,
-                "recommended_jobs": recommended_jobs,
-                "resume_summary": resume_summary,
-                "strengths": strengths,
-                "weaknesses": weaknesses,
-                "suggestions": suggestions,
-                "interview_questions": interview_questions,
-                "job_match": job_match,
-            }
-
+        if not uploaded_file:
             return render(
                 request,
                 "upload.html",
                 {
-                    "success": True,
-                    "skills": skills,
-                    "missing_skills": missing_skills,
-                    "recommended_jobs": recommended_jobs,
-                    "score": score,
-                    "ats_score": ats_score,
-                    "job_match": job_match,
-                    "resume_level": resume_level,
-                    "skill_percentage": skill_percentage,
-                    "strengths": strengths,
-                    "weaknesses": weaknesses,
-                    "suggestions": suggestions,
-                    "resume_summary": resume_summary,
-                    "interview_questions": interview_questions,
-                    "skills_count": skills_count,
-                    "missing_count": missing_count
+                    "error": "Please select a resume."
+                }
+            )
+        
+        if not uploaded_file.name.lower().endswith(".pdf"):
+            return render(
+                request,
+                "upload.html",
+                {
+                    "error": "Only PDF resume files are allowed."
                 }
             )
 
+        text = extract_text_from_pdf(uploaded_file)
+
+        if not text.strip():
+            return render(
+                request,
+                "upload.html",
+                {
+                    "error": "Unable to read PDF. Please upload a valid resume."
+                }
+            )
+
+        resume_hash = generate_resume_hash(text)
+
+        existing_resume = Resume.objects.filter(
+            user=request.user,
+            resume_hash=resume_hash
+        ).first()
+        
+
+        if existing_resume:
+
+         return render(
+         request,
+         "upload.html",
+         {
+            "error": "This resume has already been uploaded."
+         }
+        )
+
+        
+
+        
+
+        validation = validate_resume_content(text)
+
+        if not validation["is_resume"]:
+
+         return render(
+        request,
+        "upload.html",
+        {
+            "error": validation["reason"],
+            "document_type": validation["document_type"],
+            "confidence": validation["confidence"]
+        }
+    )
+        
+        Resume.objects.create(
+            user=request.user,
+            resume_file=uploaded_file,
+            resume_hash=resume_hash
+        )
+
+
+        print("\n\n========== RESUME TEXT ==========\n")
+        print(text)
+        print("\n=================================\n")
+
+        chunks, index = process_resume(text)
+
+        print("\n\n========== CHUNKS ==========\n")
+        print(chunks)
+        print("\n============================\n")
+
+        request.session["resume_text"] = text
+
+        ai_result = analyze_resume_with_ai(text)
+
+        skills = ai_result.get("skills", [])
+        missing_skills = ai_result.get("missing_skills", [])
+        recommended_jobs = ai_result.get("recommended_jobs", [])
+        strengths = ai_result.get("strengths", [])
+        weaknesses = ai_result.get("weaknesses", [])
+        suggestions = ai_result.get("suggestions", [])
+        resume_summary = ai_result.get("resume_summary", "")
+        interview_questions = ai_result.get("interview_questions", [])
+        job_match = ai_result.get("job_match",[])
+
+        score = calculate_resume_score(text,skills)
+
+        ats_score = calculate_ats_score(text)
+
+        resume_level = get_resume_level(score)
+
+        skills_count = len(skills)
+        missing_count = len(missing_skills)
+
+        total_skills = skills_count + missing_count
+
+        if total_skills > 0:
+            skill_percentage = int(
+                (skills_count / total_skills) * 100
+            )
+        else:
+            skill_percentage = 0
+
+        latest_report = {
+            "score": score,
+            "ats_score": ats_score,
+            "resume_level": resume_level,
+            "skills": skills,
+            "missing_skills": missing_skills,
+            "recommended_jobs": recommended_jobs,
+            "resume_summary": resume_summary,
+            "strengths": strengths,
+            "weaknesses": weaknesses,
+            "suggestions": suggestions,
+            "interview_questions": interview_questions,
+            "job_match": job_match,
+        }
+
+        return render(
+            request,
+            "upload.html",
+            {
+                "success": True,
+                "skills": skills,
+                "missing_skills": missing_skills,
+                "recommended_jobs": recommended_jobs,
+                "score": score,
+                "ats_score": ats_score,
+                "job_match": job_match,
+                "resume_level": resume_level,
+                "skill_percentage": skill_percentage,
+                "strengths": strengths,
+                "weaknesses": weaknesses,
+                "suggestions": suggestions,
+                "resume_summary": resume_summary,
+                "interview_questions": interview_questions,
+                "skills_count": skills_count,
+                "missing_count": missing_count
+            }
+        )
+   
     return render(request, "upload.html")
 
 

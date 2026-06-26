@@ -199,6 +199,56 @@ Logout
 <a href="{% url 'upload_resume' %}" class="btn btn-outline-info mt-3 w-100">
     Back to Resume Analyzer
 </a>
+
+    {% if error %}
+
+<div class="alert alert-danger mt-4">
+
+    <h4>
+        ❌ Upload Failed
+    </h4>
+
+    {% if document_type %}
+
+    <p>
+
+        <strong>
+
+            Detected Document:
+
+        </strong>
+
+        {{ document_type }}
+
+    </p>
+
+    {% endif %}
+
+    {% if confidence %}
+
+    <p>
+
+        <strong>
+
+            Confidence:
+
+        </strong>
+
+        {{ confidence }}%
+
+    </p>
+
+    {% endif %}
+
+    <p>
+
+        {{ error }}
+
+    </p>
+
+</div>
+
+{% endif %}
     
     {% if success %}
 

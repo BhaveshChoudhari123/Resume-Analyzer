@@ -1,5 +1,6 @@
 import PyPDF2
-
+import os
+import hashlib
 
 def extract_text_from_pdf(pdf_file):
 
@@ -119,3 +120,71 @@ def calculate_ats_score(text):
         ats_score += 5
 
     return min(ats_score, 100)
+
+def validate_resume_file(uploaded_file):
+
+    # Allowed extension
+    extension = os.path.splitext(
+        uploaded_file.name
+    )[1].lower()
+
+    if extension != ".pdf":
+
+        return False, "Only PDF resumes are allowed."
+
+    # Maximum size (5 MB)
+    if uploaded_file.size > 5 * 1024 * 1024:
+
+        return False, "Resume size should be less than 5 MB."
+
+    # Check PDF signature
+    uploaded_file.seek(0)
+
+    header = uploaded_file.read(4)
+
+    uploaded_file.seek(0)
+
+    if header != b"%PDF":
+
+        return False, "Invalid PDF file."
+
+    return True, ""
+
+
+def validate_resume_text(text):
+
+    if not text.strip():
+
+        return (
+            False,
+            "No readable text found in the uploaded PDF."
+        )
+
+    if len(text.strip()) < 150:
+
+        return (
+            False,
+            "Resume contains very little text."
+        )
+
+    return (
+        True,
+        ""
+    )
+
+def generate_resume_hash(text):
+
+    return hashlib.sha256(
+
+        text.encode()
+
+    ).hexdigest()
+
+def generate_resume_hash(text):
+    """
+    Generate a unique SHA-256 hash for resume text.
+    """
+
+    return hashlib.sha256(
+        text.strip().encode("utf-8")
+    ).hexdigest()
