@@ -7,12 +7,17 @@ An AI-powered Resume Analyzer built using **Django**, **Groq LLM**, **FAISS**, a
 # 🌐 Live Demo
 
 **Website:**
-https://web-production-1c408.up.railway.app/accounts/login/
+https://web-production-1c408.up.railway.app/accounts/login/?next=/
 
 # ✨ Features
 
 * 👤 User Registration & Login
-* 📄 Upload PDF Resume
+* 📧 Email Verification using OTP
+* 🔐 Forgot Password with Email OTP
+* 🛡 Strong Password Validation
+* 📄 Upload PDF Resume Only
+* 🤖 AI Resume Validation (Only Real Resumes Allowed)
+* 🚫 Duplicate Resume Detection using Resume Hashing
 * 🤖 AI Resume Analysis
 * 📊 ATS Score Calculation
 * ⭐ Resume Score
@@ -27,6 +32,7 @@ https://web-production-1c408.up.railway.app/accounts/login/
 * 📜 Resume History
 * 🗄 PostgreSQL Database
 * ☁ Railway Deployment
+
 
 ---
 
@@ -43,6 +49,8 @@ https://web-production-1c408.up.railway.app/accounts/login/
 * Groq LLM
 * RAG (Retrieval-Augmented Generation)
 * FAISS Vector Database
+* Sentence Transformers
+* Hugging Face Transformers
 
 ## Database
 
@@ -54,9 +62,17 @@ https://web-production-1c408.up.railway.app/accounts/login/
 * CSS
 * Bootstrap
 
+## Authentication & Security
+
+* Email OTP Verification
+* Password Reset via OTP
+* Resume Hashing (SHA-256)
+* AI Resume Validation
+
 ## Deployment
 
 * Railway
+
 
 ---
 
@@ -186,14 +202,22 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-# 🚀 Future Improvements
+#  Future Improvements
 
-* Voice AI Interview Assistant
-* Resume Comparison
-* AI Career Roadmap Generator
-* Recruiter Dashboard
-* Resume Version History
-* Multi-language Resume Analysis
+*  AI-Powered ATS Scoring Engine
+*  Resume Analytics Dashboard
+*  Voice AI Interview Assistant
+*  Resume Comparison
+*  AI Career Roadmap Generator
+*  Recruiter Dashboard
+*  Resume Version History
+*  Multi-language Resume Analysis
+*  Email Resume Report
+*  Mobile Responsive Dashboard
+*  Job Portal API Integration
+*  AI Keyword Optimization
+*  Resume Progress Tracking
+
 
 ---
 
