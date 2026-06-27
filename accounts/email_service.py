@@ -4,11 +4,11 @@ import resend
 resend.api_key = os.getenv("RESEND_API_KEY")
 
 
-def send_otp_email(to_email, otp, subject):
+def send_otp_email(email, otp, subject):
 
     resend.Emails.send({
         "from": "Resume Analyzer <onboarding@resend.dev>",
-        "to": [to_email],
+        "to": email,
         "subject": subject,
         "html": f"""
         <h2>Resume Analyzer</h2>
@@ -17,6 +17,6 @@ def send_otp_email(to_email, otp, subject):
 
         <h1>{otp}</h1>
 
-        <p>This OTP is valid for 5 minutes.</p>
+        <p>This OTP expires in 5 minutes.</p>
         """
     })

@@ -115,7 +115,7 @@ def register_view(request):
 
             messages.error(
                 request,
-                f"Unable to send OTP email.\n{e}"
+                "Unable to send verification email."
             )
 
             return redirect("register")
@@ -293,7 +293,7 @@ def resend_otp(request):
 
         messages.error(
             request,
-            f"Unable to send OTP.\n{e}"
+             "Unable to resend OTP."
         )
 
         return redirect("verify_otp")
@@ -352,7 +352,7 @@ def forgot_password(request):
 
             messages.error(
                 request,
-                f"Unable to send OTP email.\n{e}"
+                "Unable to send password reset OTP."
             )
 
             return redirect("forgot_password")
