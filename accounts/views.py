@@ -92,44 +92,12 @@ def register_view(request):
             password=password1
         )
 
-        otp = generate_otp()
-
-        EmailVerification.objects.create(
-            user=user,
-            otp=otp
-        )
-
-        try:
-
-              send_mail(
-                  subject="Resume Analyzer Email Verification",
-                  message=f"Your OTP is: {otp}",
-                  from_email=settings.DEFAULT_FROM_EMAIL,
-                  recipient_list=[email],
-                  fail_silently=False,
-              )
-
-        except Exception as e:
-
-            print("EMAIL ERROR:", str(e))
-
-            user.delete()
-
-            messages.error(
-                request,
-                "Unable to send verification email."
-            )
-
-            return redirect("register")
-
         messages.success(
             request,
-            "OTP sent to your email. Please verify your account."
+            "Registration successful. Please login."
         )
 
-        request.session["pending_user"] = user.username
-
-        return redirect("verify_otp")
+        return redirect("login")
 
     return render(
         request,
@@ -152,18 +120,16 @@ def login_view(request):
 
         if user is not None:
 
-            verification = EmailVerification.objects.filter(
-                user=user
-            ).first()
+            if user is not None:
 
-            if verification and not verification.is_verified:
+             login(request, user)
 
-               messages.error(
-                   request,
-                   "Please verify your email before logging in."
-               )
+             messages.success(
+                 request,
+                 f"Welcome {username}"
+             )
 
-               return redirect("verify_otp")
+             return redirect("/")
 
             login(request, user)
 
