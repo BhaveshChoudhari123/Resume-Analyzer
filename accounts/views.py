@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .email_service import send_otp_email
 from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
+from django.core.mail import send_mail
 
 from .models import EmailVerification
 from .utils import generate_otp
@@ -101,11 +101,13 @@ def register_view(request):
 
         try:
 
-             send_otp_email(
-                 email,
-                 otp,
-                 "Resume Analyzer Email Verification"
-            )
+              send_mail(
+                  subject="Resume Analyzer Email Verification",
+                  message=f"Your OTP is: {otp}",
+                  from_email=settings.DEFAULT_FROM_EMAIL,
+                  recipient_list=[email],
+                  fail_silently=False,
+              )
 
         except Exception as e:
 
@@ -281,10 +283,12 @@ def resend_otp(request):
 
     try:
 
-        send_otp_email(
-            user.email,
-            otp,
-            "Resume Analyzer Email Verification"
+        send_mail(
+            subject="Resume Analyzer Email Verification",
+            message=f"Your OTP is: {otp}",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[email],
+            fail_silently=False,
         )
 
     except Exception as e:
@@ -339,12 +343,14 @@ def forgot_password(request):
         request.session["reset_user"] = user.username
 
         try:
-
-            send_otp_email(
-                email,
-                otp,
-                "Password Reset OTP"
-            )
+        
+         send_mail(
+            subject="Resume Analyzer Email Verification",
+            message=f"Your OTP is: {otp}",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[email],
+            fail_silently=False,
+         )
 
         except Exception as e:
 
