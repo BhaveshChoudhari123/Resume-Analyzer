@@ -22,57 +22,68 @@ def register_view(request):
         email = request.POST.get("email")
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
-        
+
         if len(password1) < 8:
-             messages.error(
-                  request,
-                  "Password must be at least 8 characters long."
-             )
-             return redirect("register")
+            messages.error(
+                request,
+                "Password must be at least 8 characters long."
+            )
+            return redirect("register")
 
         if not re.search(r"[A-Z]", password1):
             messages.error(
-                 request, 
-                 "Password must contain at least one uppercase letter."
-             )
+                request,
+                "Password must contain at least one uppercase letter."
+            )
             return redirect("register")
-        
+
         if not re.search(r"[a-z]", password1):
-             messages.error(
-                 request,
-                 "Password must contain at least one lowercase letter."
-             )
-             return redirect("register")
+            messages.error(
+                request,
+                "Password must contain at least one lowercase letter."
+            )
+            return redirect("register")
 
         if not re.search(r"\d", password1):
-             messages.error(
-                 request,
-                 "Password must contain at least one number."
-             )
-             return redirect("register")
+            messages.error(
+                request,
+                "Password must contain at least one number."
+            )
+            return redirect("register")
 
         if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password1):
-             messages.error(
-                 request, 
-                  "Password must contain at least one special character."
-             )
-             return redirect("register") 
-
+            messages.error(
+                request,
+                "Password must contain at least one special character."
+            )
+            return redirect("register")
 
         if not username:
-            messages.error(request, "Username is required")
+            messages.error(
+                request,
+                "Username is required"
+            )
             return redirect("register")
 
         if password1 != password2:
-            messages.error(request, "Passwords do not match")
+            messages.error(
+                request,
+                "Passwords do not match"
+            )
             return redirect("register")
 
         if User.objects.filter(username=username).exists():
-            messages.error(request, "Username already exists")
+            messages.error(
+                request,
+                "Username already exists"
+            )
             return redirect("register")
 
         if User.objects.filter(email=email).exists():
-            messages.error(request, "Email already registered")
+            messages.error(
+                request,
+                "Email already registered"
+            )
             return redirect("register")
 
         user = User.objects.create_user(
@@ -84,17 +95,32 @@ def register_view(request):
         otp = generate_otp()
 
         EmailVerification.objects.create(
-           user=user,
-           otp=otp
+            user=user,
+            otp=otp
         )
-        
-        send_mail(
-            subject="Resume Analyzer Email Verification",
-            message=f"Your OTP is: {otp}",
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[email],
-            fail_silently=False,
-        )
+
+        try:
+
+            send_mail(
+                subject="Resume Analyzer Email Verification",
+                message=f"Your OTP is: {otp}",
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+
+        except Exception as e:
+
+            print("EMAIL ERROR:", str(e))
+
+            user.delete()
+
+            messages.error(
+                request,
+                f"Unable to send OTP email.\n{e}"
+            )
+
+            return redirect("register")
 
         messages.success(
             request,
@@ -105,7 +131,10 @@ def register_view(request):
 
         return redirect("verify_otp")
 
-    return render(request, "register.html")
+    return render(
+        request,
+        "register.html"
+    )
 
 
 def login_view(request):
@@ -252,13 +281,26 @@ def resend_otp(request):
     verification.created_at = timezone.now()
     verification.save()
 
-    send_mail(
-        subject="Resume Analyzer Email Verification",
-        message=f"Your new OTP is: {otp}",
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[user.email],
-        fail_silently=False,
-    )
+    try:
+
+        send_mail(
+            subject="Resume Analyzer Email Verification",
+            message=f"Your new OTP is: {otp}",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email],
+            fail_silently=False,
+        )
+
+    except Exception as e:
+
+        print("EMAIL ERROR:", str(e))
+
+        messages.error(
+            request,
+            f"Unable to send OTP.\n{e}"
+        )
+
+        return redirect("verify_otp")
 
     messages.success(
         request,
@@ -300,26 +342,33 @@ def forgot_password(request):
 
         request.session["reset_user"] = user.username
 
-        send_mail(
+        try:
 
-            subject="Password Reset OTP",
+            send_mail(
+                subject="Password Reset OTP",
+                message=f"Your OTP is: {otp}",
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[email],
+                fail_silently=False,
+            )
 
-            message=f"Your OTP is: {otp}",
+        except Exception as e:
 
-            from_email=settings.EMAIL_HOST_USER,
+            print("EMAIL ERROR:", str(e))
 
-            recipient_list=[email],
+            messages.error(
+                request,
+                f"Unable to send OTP email.\n{e}"
+            )
 
-            fail_silently=False
-
-        )
+            return redirect("forgot_password")
 
         messages.success(
             request,
             "OTP sent successfully."
         )
 
-        return redirect("verify_otp")
+        return redirect("reset_password")
 
     return render(
         request,
