@@ -74,23 +74,11 @@ def upload_resume(request):
                 }
             )
 
-        resume_hash = generate_resume_hash(text)
-
-        existing_resume = Resume.objects.filter(
-            user=request.user,
-            resume_hash=resume_hash
-        ).first()
-        
-
-        if existing_resume:
-
-         return render(
-         request,
-         "upload.html",
-         {
-            "error": "This resume has already been uploaded."
-         }
-        )
+        Resume.objects.create(
+    user=request.user,
+    resume_file=uploaded_file,
+    resume_hash=generate_resume_hash(text)
+)
 
         
 

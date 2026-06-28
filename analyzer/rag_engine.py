@@ -1,17 +1,14 @@
-from sentence_transformers import SentenceTransformer
-
 from .pipelines.chunk_pipeline import create_chunks
-from .pipelines.embedding_pipeline import generate_embeddings
+from .pipelines.embedding_pipeline import (
+    generate_embeddings,
+    get_model
+)
 from .pipelines.vector_pipeline import create_vector_store
 from .pipelines.retrieval_pipeline import retrieve_chunks
 from .pipelines.rag_pipeline import generate_answer
 
-model = SentenceTransformer(
-    "all-MiniLM-L6-v2"
-)
-
-
 VECTOR_CACHE = {}
+
 
 def process_resume(text):
 
@@ -29,12 +26,13 @@ def process_resume(text):
     return chunks, index
 
 
-
 def ask_resume_question(
     question,
     chunks,
     index
 ):
+
+    model = get_model()
 
     relevant_chunks = retrieve_chunks(
         question,
@@ -43,9 +41,7 @@ def ask_resume_question(
         model
     )
 
-    context = "\n\n".join(
-        relevant_chunks
-    )
+    context = "\n\n".join(relevant_chunks)
 
     answer = generate_answer(
         question,
