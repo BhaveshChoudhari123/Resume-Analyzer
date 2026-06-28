@@ -349,7 +349,3 @@ def improve_resume_view(request):
         }
     )
 
-from django.shortcuts import render
-
-def loading(request):
-    return render(request, "loading.html")
