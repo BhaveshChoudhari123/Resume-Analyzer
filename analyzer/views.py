@@ -47,6 +47,8 @@ def upload_resume(request):
 
         uploaded_file = request.FILES.get("resume")
 
+        print("STEP 1")
+
         if not uploaded_file:
             return render(
                 request,
@@ -66,6 +68,8 @@ def upload_resume(request):
             )
 
         text = extract_text_from_pdf(uploaded_file)
+
+        print("STEP 2")
 
         if not text.strip():
             return render(
@@ -88,6 +92,8 @@ def upload_resume(request):
 
         validation = validate_resume_content(text)
 
+        print("STEP 3")
+
         if not validation["is_resume"]:
 
          return render(
@@ -105,13 +111,16 @@ def upload_resume(request):
             resume_file=uploaded_file,
             resume_hash=resume_hash
         )
-
+            
+        print("STEP 4")
 
         print("\n\n========== RESUME TEXT ==========\n")
         print(text)
         print("\n=================================\n")
 
         chunks, index = process_resume(text)
+
+        print("STEP 5")
 
         print("\n\n========== CHUNKS ==========\n")
         print(chunks)
@@ -120,6 +129,8 @@ def upload_resume(request):
         request.session["resume_text"] = text
 
         ai_result = analyze_resume_with_ai(text)
+
+        print("STEP 6")
 
         skills = ai_result.get("skills", [])
         missing_skills = ai_result.get("missing_skills", [])
@@ -163,6 +174,8 @@ def upload_resume(request):
             "interview_questions": interview_questions,
             "job_match": job_match,
         }
+
+        print("STEP 7")
 
         return render(
             request,
