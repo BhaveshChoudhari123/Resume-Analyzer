@@ -5,6 +5,11 @@ from .rag_engine import (
     ask_resume_question
 )
 
+from django.shortcuts import render
+
+def loading(request):
+    return render(request,"loading.html")
+
 
 
 from .pipelines.resume_validation_pipeline import (
