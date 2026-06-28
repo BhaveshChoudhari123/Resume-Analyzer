@@ -10,11 +10,6 @@ urlpatterns = [
     ),
 
     path(
-        "loading/",
-        views.loading,name="loading"
-    ),
-
-    path(
         'history/',
         views.resume_history,
         name='history'
