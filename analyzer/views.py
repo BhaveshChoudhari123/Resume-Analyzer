@@ -7,8 +7,7 @@ from .rag_engine import (
 
 from django.shortcuts import render
 
-def loading(request):
-    return render(request,"loading.html")
+
 
 
 
@@ -352,3 +351,6 @@ def improve_resume_view(request):
             "result": result
         }
     )
+
+def loading(request):
+    return render(request,"loading.html")
