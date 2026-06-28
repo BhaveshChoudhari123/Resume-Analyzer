@@ -5,9 +5,6 @@ from .rag_engine import (
     ask_resume_question
 )
 
-from django.shortcuts import render
-
-
 
 
 
@@ -351,6 +348,3 @@ def improve_resume_view(request):
             "result": result
         }
     )
-
-def loading(request):
-    return render(request,"loading.html")
