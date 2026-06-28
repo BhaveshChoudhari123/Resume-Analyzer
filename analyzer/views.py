@@ -39,6 +39,8 @@ latest_report = {}
 @login_required
 def upload_resume(request):
 
+    print("UPLOAD_RESUME FUNCTION CALLED")
+
     global latest_report
 
     if request.method == "POST":
