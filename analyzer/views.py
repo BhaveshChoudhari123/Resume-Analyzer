@@ -69,6 +69,8 @@ def upload_resume(request):
 
         text = extract_text_from_pdf(uploaded_file)
 
+        resume_hash = generate_resume_hash(text)
+
         print("STEP 2")
 
         if not text.strip():
@@ -80,11 +82,7 @@ def upload_resume(request):
                 }
             )
 
-        Resume.objects.create(
-    user=request.user,
-    resume_file=uploaded_file,
-    resume_hash=generate_resume_hash(text)
-)
+        
 
         
 
@@ -106,19 +104,23 @@ def upload_resume(request):
         }
     )
         
-        Resume.objects.create(
-            user=request.user,
-            resume_file=uploaded_file,
-            resume_hash=resume_hash
-        )
-            
-        print("STEP 4")
+        try:
+            Resume.objects.create(
+                user=request.user,
+                resume_file=uploaded_file,
+                resume_hash=resume_hash
+            )
+            print("STEP 4")
+
+        except Exception as e:
+            print("DATABASE ERROR:", e)
+            raise
 
         print("\n\n========== RESUME TEXT ==========\n")
         print(text)
         print("\n=================================\n")
 
-        chunks, index = process_resume(text)
+        #chunks, index = process_resume(text)
 
         print("STEP 5")
 
@@ -278,7 +280,9 @@ def ask_question(request):
                 "answer": "Upload resume first."
             })
 
-        chunks, index = process_resume(text)
+        return JsonResponse({
+    "answer": "Resume chatbot is temporarily disabled."
+})
 
         answer = ask_resume_question(
         question,
