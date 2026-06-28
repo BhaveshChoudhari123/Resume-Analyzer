@@ -128,9 +128,18 @@ def upload_resume(request):
         print(chunks)
         print("\n============================\n")
 
+        
         request.session["resume_text"] = text
 
-        ai_result = analyze_resume_with_ai(text)
+        print("BEFORE AI")
+
+        try:
+            ai_result = analyze_resume_with_ai(text)
+            print("AI COMPLETED")
+
+        except Exception as e:
+            print("AI ERROR:", str(e))
+            raise
 
         print("STEP 6")
 
