@@ -8,6 +8,7 @@ def extract_text_from_pdf(pdf_file):
 
     try:
 
+        pdf_file.seek(0)
         reader = PyPDF2.PdfReader(pdf_file)
 
         for page in reader.pages:
@@ -56,7 +57,7 @@ def calculate_resume_score(text, skills):
     text = text.lower()
 
     # Skills
-    score += len(skills) * 3
+    score += min(len(skills) * 3, 30)
 
     # Resume Sections
     if "education" in text:
@@ -119,6 +120,12 @@ def calculate_ats_score(text):
     if len(text) > 1000:
         ats_score += 5
 
+    if "email" in text:
+        ats_score += 3
+
+    if "phone" in text:
+        ats_score += 3
+
     return min(ats_score, 100)
 
 def validate_resume_file(uploaded_file):
@@ -172,13 +179,7 @@ def validate_resume_text(text):
         ""
     )
 
-def generate_resume_hash(text):
 
-    return hashlib.sha256(
-
-        text.encode()
-
-    ).hexdigest()
 
 def generate_resume_hash(text):
     """

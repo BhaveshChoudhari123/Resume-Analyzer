@@ -34,20 +34,18 @@ from .ai_engine import analyze_resume_with_ai
 from .models import Resume
 from .pdf_generator import generate_pdf_report
 
+
+
 latest_report = {}
 
 @login_required
 def upload_resume(request):
-
-    print("UPLOAD_RESUME FUNCTION CALLED")
 
     global latest_report
 
     if request.method == "POST":
 
         uploaded_file = request.FILES.get("resume")
-
-        print("STEP 1")
 
         if not uploaded_file:
             return render(
@@ -57,7 +55,7 @@ def upload_resume(request):
                     "error": "Please select a resume."
                 }
             )
-        
+
         if not uploaded_file.name.lower().endswith(".pdf"):
             return render(
                 request,
@@ -69,10 +67,6 @@ def upload_resume(request):
 
         text = extract_text_from_pdf(uploaded_file)
 
-        resume_hash = generate_resume_hash(text)
-
-        print("STEP 2")
-
         if not text.strip():
             return render(
                 request,
@@ -82,66 +76,54 @@ def upload_resume(request):
                 }
             )
 
-        
-
-        
-
-        
+        resume_hash = generate_resume_hash(text)
 
         validation = validate_resume_content(text)
 
-        print("STEP 3")
-
         if not validation["is_resume"]:
-
-         return render(
-        request,
-        "upload.html",
-        {
-            "error": validation["reason"],
-            "document_type": validation["document_type"],
-            "confidence": validation["confidence"]
-        }
-    )
-        
-        try:
-            Resume.objects.create(
-                user=request.user,
-                resume_file=uploaded_file,
-                resume_hash=resume_hash
+            return render(
+                request,
+                "upload.html",
+                {
+                    "error": validation["reason"],
+                    "document_type": validation["document_type"],
+                    "confidence": validation["confidence"]
+                }
             )
-            print("STEP 4")
+
+        try:
+            chunks, index = process_resume(text)
 
         except Exception as e:
-            print("DATABASE ERROR:", e)
-            raise
+            print("RAG ERROR:", str(e))
 
-        print("\n\n========== RESUME TEXT ==========\n")
-        print(text)
-        print("\n=================================\n")
+            return render(
+                request,
+                "upload.html",
+                {
+                    "error": "Unable to analyze resume. Please try again."
+                }
+            )
 
-        #chunks, index = process_resume(text)
-
-        print("STEP 5")
-
-        print("\n\n========== CHUNKS ==========\n")
-        print(chunks)
-        print("\n============================\n")
-
-        
         request.session["resume_text"] = text
-
-        print("BEFORE AI")
 
         try:
             ai_result = analyze_resume_with_ai(text)
-            print("AI COMPLETED")
 
         except Exception as e:
             print("AI ERROR:", str(e))
-            raise
 
-        print("STEP 6")
+            ai_result = {
+                "skills": [],
+                "missing_skills": [],
+                "recommended_jobs": [],
+                "strengths": [],
+                "weaknesses": [],
+                "suggestions": [],
+                "resume_summary": "AI analysis unavailable.",
+                "interview_questions": [],
+                "job_match": []
+            }
 
         skills = ai_result.get("skills", [])
         missing_skills = ai_result.get("missing_skills", [])
@@ -151,12 +133,10 @@ def upload_resume(request):
         suggestions = ai_result.get("suggestions", [])
         resume_summary = ai_result.get("resume_summary", "")
         interview_questions = ai_result.get("interview_questions", [])
-        job_match = ai_result.get("job_match",[])
+        job_match = ai_result.get("job_match", [])
 
-        score = calculate_resume_score(text,skills)
-
+        score = calculate_resume_score(text, skills)
         ats_score = calculate_ats_score(text)
-
         resume_level = get_resume_level(score)
 
         skills_count = len(skills)
@@ -170,6 +150,24 @@ def upload_resume(request):
             )
         else:
             skill_percentage = 0
+
+        try:
+            Resume.objects.create(
+                user=request.user,
+                resume_file=uploaded_file,
+                resume_hash=resume_hash
+            )
+
+        except Exception as e:
+            print("DATABASE ERROR:", str(e))
+
+            return render(
+                request,
+                "upload.html",
+                {
+                    "error": "Unable to save resume."
+                }
+            )
 
         latest_report = {
             "score": score,
@@ -185,8 +183,6 @@ def upload_resume(request):
             "interview_questions": interview_questions,
             "job_match": job_match,
         }
-
-        print("STEP 7")
 
         return render(
             request,
@@ -210,7 +206,7 @@ def upload_resume(request):
                 "missing_count": missing_count
             }
         )
-   
+
     return render(request, "upload.html")
 
 
@@ -246,8 +242,7 @@ def download_report(request):
         'filename="resume_report.pdf"'
     )
 
-    print("PDF REPORT DATA")
-    print(latest_report)
+    
 
     generate_pdf_report(
         response,
@@ -278,35 +273,36 @@ def ask_question(request):
 
         question = request.POST.get("question")
 
-        text = request.session.get(
-            "resume_text",
-            ""
-        )
+        text = request.session.get("resume_text", "")
 
         if not text:
-
             return JsonResponse({
                 "answer": "Upload resume first."
             })
 
-        return JsonResponse({
-    "answer": "Resume chatbot is temporarily disabled."
-})
+        try:
+            chunks, index = process_resume(text)
 
-        answer = ask_resume_question(
-        question,
-        chunks,
-        index
-        )
+            answer = ask_resume_question(
+                question,
+                chunks,
+                index
+            )
 
-        return JsonResponse({
-            "answer": answer
-        })
+            return JsonResponse({
+                "answer": answer
+            })
+
+        except Exception as e:
+            print("CHATBOT ERROR:", str(e))
+
+            return JsonResponse({
+                "answer": "Unable to answer the question right now."
+            })
 
     return JsonResponse({
         "answer": "Invalid request"
     })
-
 
 def job_match(request):
 

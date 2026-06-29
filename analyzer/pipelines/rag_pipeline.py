@@ -1,9 +1,8 @@
 from dotenv import load_dotenv
 import os
+from groq import Groq
 
 load_dotenv()
-
-from groq import Groq
 
 client = Groq(
     api_key=os.getenv("GROQ_API_KEY")
@@ -15,44 +14,52 @@ def generate_answer(
     context
 ):
 
-    response = client.chat.completions.create(
+    try:
 
-        model="llama-3.1-8b-instant",
+        response = client.chat.completions.create(
 
-        messages=[
+            model="llama-3.1-8b-instant",
 
-            {
-                "role": "system",
-                "content":
-                """
-                You are an AI Resume Assistant.
+            messages=[
 
-                Answer only from the provided resume context.
+                {
+                    "role": "system",
+                    "content":
+                    """
+                    You are an AI Resume Assistant.
 
-                If information is unavailable, reply:
+                    Answer only from the provided resume context.
 
-                'This information is not present in the uploaded resume.'
-                """
-            },
+                    If information is unavailable, reply:
 
-            {
-                "role": "user",
-                "content":
-                f"""
-                Resume Context:
+                    'This information is not present in the uploaded resume.'
+                    """
+                },
 
-                {context}
+                {
+                    "role": "user",
+                    "content":
+                    f"""
+                    Resume Context:
 
-                Question:
+                    {context}
 
-                {question}
-                """
-            }
+                    Question:
 
-        ],
+                    {question}
+                    """
+                }
 
-        temperature=0.2,
-        max_tokens=300
-    )
+            ],
 
-    return response.choices[0].message.content
+            temperature=0.2,
+            max_tokens=300
+        )
+
+        return response.choices[0].message.content
+
+    except Exception as e:
+
+        print("GROQ ERROR:", str(e))
+
+        return "Unable to answer the question right now. Please try again later."

@@ -6,8 +6,6 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.mail import send_mail
 
-from .models import EmailVerification
-from .utils import generate_otp
 from django.contrib import messages
 from django.contrib.auth import logout
 
@@ -120,25 +118,14 @@ def login_view(request):
 
         if user is not None:
 
-            if user is not None:
+         login(request, user)
 
-             login(request, user)
+         messages.success(
+             request,
+             f"Welcome {username}"
+         )
 
-             messages.success(
-                 request,
-                 f"Welcome {username}"
-             )
-
-             return redirect("/")
-
-            login(request, user)
-
-            messages.success(
-               request,
-               f"Welcome {username}"
-            )
-
-            return redirect("/")
+         return redirect("/")
 
         else:
 
@@ -160,7 +147,6 @@ def logout_view(request):
 
     return redirect("login")
     
-from .models import EmailVerification
 
 def verify_otp(request):
 

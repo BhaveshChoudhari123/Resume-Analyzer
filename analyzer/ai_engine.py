@@ -5,6 +5,9 @@ from groq import Groq
 
 load_dotenv()
 
+if not os.getenv("GROQ_API_KEY"):
+    raise ValueError("GROQ_API_KEY is missing")
+
 client = Groq(
     api_key=os.getenv("GROQ_API_KEY")
 )
@@ -68,7 +71,7 @@ JSON:
                 }
             ],
             temperature=0.2,
-            max_tokens=1200
+            max_tokens=800
         )
 
         result = response.choices[0].message.content.strip()

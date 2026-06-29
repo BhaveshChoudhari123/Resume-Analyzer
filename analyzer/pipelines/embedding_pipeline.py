@@ -8,7 +8,8 @@ def get_model():
 
     if MODEL is None:
         MODEL = SentenceTransformer(
-            "all-MiniLM-L6-v2"
+            "all-MiniLM-L6-v2",
+            device="cpu"
         )
 
     return MODEL
@@ -21,7 +22,9 @@ def generate_embeddings(chunks):
     embeddings = model.encode(
         chunks,
         convert_to_numpy=True,
-        batch_size=8
+        batch_size=4,
+        show_progress_bar=False,
+        normalize_embeddings=True
     )
 
     return embeddings

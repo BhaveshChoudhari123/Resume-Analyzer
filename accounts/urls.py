@@ -1,8 +1,5 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import register_view, login_view
-
-from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -11,12 +8,6 @@ urlpatterns = [
         'register/',
         views.register_view,
         name='register'
-    ),
-
-    path(
-    "forgot-password/",
-    views.forgot_password,
-    name="forgot_password"
     ),
 
     path(
@@ -32,11 +23,16 @@ urlpatterns = [
     ),
 
     path(
-    "reset-password/",
-    views.reset_password,
-    name="reset_password"
+        "forgot-password/",
+        views.forgot_password,
+        name="forgot_password"
     ),
 
+    path(
+        "reset-password/",
+        views.reset_password,
+        name="reset_password"
+    ),
 
     path(
         'password-reset/',
