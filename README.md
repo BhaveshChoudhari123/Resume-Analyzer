@@ -50,7 +50,6 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 * RAG (Retrieval-Augmented Generation)
 * FAISS Vector Database
 * Sentence Transformers
-* Hugging Face Transformers
 
 ## Database
 
