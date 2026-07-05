@@ -12,7 +12,6 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 # ✨ Features
 
 * 👤 User Registration & Login
-* 📧 Email Verification using OTP
 * 🔐 Forgot Password with Email OTP
 * 🛡 Strong Password Validation
 * 📄 Upload PDF Resume Only
