@@ -43,7 +43,7 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 * Django
 * Django REST Framework
 
-## Artificial Intelligence
+## Artificial Intelligence:
 
 * Groq LLM
 * RAG (Retrieval-Augmented Generation)
