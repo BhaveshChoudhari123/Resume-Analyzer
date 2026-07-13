@@ -67,7 +67,7 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 * Resume Hashing (SHA-256)
 * AI Resume Validation
 
-## Deployment
+## Deployment:
 
 * Railway
 
