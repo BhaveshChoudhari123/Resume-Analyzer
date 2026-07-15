@@ -132,7 +132,7 @@ python manage.py runserver
 
 ---
 
-# 🔐 Environment Variables
+# 🔐 Environment Variables:
 
 Create a `.env` file in the project root and add the following variables.
 
