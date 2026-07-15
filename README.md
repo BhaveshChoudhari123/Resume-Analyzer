@@ -152,7 +152,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-# 📸 Screenshots
+# 📸 Screenshots:
 
 ## 🏠 Home Page
 
