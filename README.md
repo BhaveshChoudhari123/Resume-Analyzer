@@ -166,7 +166,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-## 📝 Register Page
+## 📝 Register Page:
 
 <img width="1918" height="1013" alt="register" src="https://github.com/user-attachments/assets/88f06f2d-1b57-4e52-b2fb-933f10fd7d54" />
 
