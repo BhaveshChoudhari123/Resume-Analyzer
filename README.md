@@ -160,7 +160,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-## 🔐 Login Page
+## 🔐 Login Page:
 
 <img width="1918" height="1020" alt="login" src="https://github.com/user-attachments/assets/2896d3e7-e20e-4840-9804-c3b5dfc9760f" />
 
