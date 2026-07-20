@@ -1,37 +1,43 @@
-from sentence_transformers import (
-    SentenceTransformer
-)
+import numpy as np
 
-from sklearn.metrics.pairwise import (
-    cosine_similarity
-)
+MODEL = None
 
 
-model = SentenceTransformer(
-    "all-MiniLM-L6-v2"
-)
+def get_model():
+    global MODEL
+
+    if MODEL is None:
+        from sentence_transformers import SentenceTransformer
+
+        MODEL = SentenceTransformer(
+            "all-MiniLM-L6-v2",
+            device="cpu"
+        )
+
+    return MODEL
 
 
-def calculate_match_score(
-    resume_text,
-    job_description
-):
+def calculate_match_score(resume_text, job_description):
 
-    resume_embedding = model.encode(
-        [resume_text]
+    model = get_model()
+
+    embeddings = model.encode(
+        [resume_text, job_description],
+        convert_to_numpy=True,
+        batch_size=2,
+        show_progress_bar=False,
+        normalize_embeddings=True
     )
 
-    jd_embedding = model.encode(
-        [job_description]
+    # Since embeddings are normalized,
+    # dot product gives cosine similarity
+    similarity = np.dot(
+        embeddings[0],
+        embeddings[1]
     )
-
-    similarity = cosine_similarity(
-        resume_embedding,
-        jd_embedding
-    )[0][0]
 
     score = round(
-        similarity * 100,
+        float(similarity) * 100,
         2
     )
 
