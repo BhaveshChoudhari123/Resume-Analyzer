@@ -1,5 +1,3 @@
-from sentence_transformers import SentenceTransformer
-
 MODEL = None
 
 
@@ -7,6 +5,8 @@ def get_model():
     global MODEL
 
     if MODEL is None:
+        from sentence_transformers import SentenceTransformer
+
         MODEL = SentenceTransformer(
             "all-MiniLM-L6-v2",
             device="cpu"
