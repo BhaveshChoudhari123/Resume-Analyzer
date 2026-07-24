@@ -191,7 +191,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-## 📑 PDF Report
+## 📑 PDF Report:
 
 <img width="997" height="838" alt="report" src="https://github.com/user-attachments/assets/7af8d3e2-c904-4c65-ac54-fe9bbd45970d" />
 
