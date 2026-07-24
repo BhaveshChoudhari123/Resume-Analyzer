@@ -178,7 +178,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-## 💬 RAG Chatbot
+## 💬 RAG Chatbot:
 
 <img width="1918" height="922" alt="chatbot" src="https://github.com/user-attachments/assets/8b23199f-4333-4f06-8b0b-4a391694e4f5" />
 
