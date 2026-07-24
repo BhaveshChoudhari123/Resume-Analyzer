@@ -184,7 +184,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-## 🎯 Job Match
+## 🎯 Job Match:
 
 <img width="1918" height="1023" alt="job_match" src="https://github.com/user-attachments/assets/c6e25756-0d79-452b-9415-bfa233533c73" />
 
