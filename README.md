@@ -6,7 +6,7 @@ An AI-powered Resume Analyzer built using **Django**, **Groq LLM**, **FAISS**, a
 
 # 🌐 Live Demo:-
 
-**Website:**
+**Website:-**
 https://web-production-1c408.up.railway.app/accounts/login/?next=/
 
 # ✨ Features:-
