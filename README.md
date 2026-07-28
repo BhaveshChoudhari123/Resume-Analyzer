@@ -37,7 +37,7 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 
 # 🛠 Tech Stack:-
 
-## Backend:
+## Backend:-
 
 * Python
 * Django
