@@ -86,7 +86,7 @@ Clone the repository
 git clone (https://github.com/BhaveshChoudhari123/Resume-Analyzer)
 ```
 
-Move into the project
+Move into the projectL:
 
 ```bash
 cd Resume-Analyzer
