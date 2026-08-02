@@ -92,7 +92,7 @@ Move into the projectL:-
 cd Resume-Analyzer
 ```
 
-Create Virtual Environment:
+Create Virtual Environment:-
 
 ```bash
 python -m venv venv
