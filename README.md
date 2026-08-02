@@ -118,7 +118,7 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Run migrations
+Run migrations:
 
 ```bash
 python manage.py migrate
