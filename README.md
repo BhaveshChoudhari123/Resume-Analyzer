@@ -98,7 +98,7 @@ Create Virtual Environment:-
 python -m venv venv
 ```
 
-Activate Virtual Environment:
+Activate Virtual Environment:-
 
 ### Windows:
 
