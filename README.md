@@ -124,7 +124,7 @@ Run migrations:-
 python manage.py migrate
 ```
 
-Start the server
+Start the server:
 
 ```bash
 python manage.py runserver
