@@ -154,7 +154,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 # 📸 Screenshots:-
 
-## 🏠 Home Page:
+## 🏠 Home Page:-
 
 <img width="1918" height="1023" alt="home" src="https://github.com/user-attachments/assets/45f4073e-5979-45f7-9121-178eaa16a425" />
 
