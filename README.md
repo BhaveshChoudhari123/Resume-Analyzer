@@ -172,7 +172,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-## 🤖 AI Resume Analysis:
+## 🤖 AI Resume Analysis:-
 
 <img width="1918" height="1020" alt="analysis" src="https://github.com/user-attachments/assets/d1d9288e-e128-48cd-a642-b70c51987fe3" />
 
