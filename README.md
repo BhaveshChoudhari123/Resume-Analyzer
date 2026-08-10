@@ -200,7 +200,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-#  Future Improvements:
+#  Future Improvements:-
 
 *  AI-Powered ATS Scoring Engine
 *  Resume Analytics Dashboard
