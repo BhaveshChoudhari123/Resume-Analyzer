@@ -219,7 +219,7 @@ HF_API_TOKEN=your_huggingface_token_here
 
 ---
 
-# 🤝 Contributing
+# 🤝 Contributing:
 
 Contributions, suggestions, and improvements are welcome.
 
