@@ -1,4 +1,4 @@
-# 🚀 AI Resume Analyzer with RAG Chatbot:-
+# 🚀 AI Resume Analyzer with RAG Chatbot:
 
 An AI-powered Resume Analyzer built using **Django**, **Groq LLM**, **FAISS**, and **PostgreSQL**. The application analyzes resumes, calculates ATS scores, recommends jobs, generates interview questions, provides AI-powered resume improvement suggestions, and includes a Retrieval-Augmented Generation (RAG) chatbot that answers questions based on the uploaded resume.
 
