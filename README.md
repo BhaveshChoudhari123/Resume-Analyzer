@@ -35,7 +35,7 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 
 ---
 
-# 🛠 Tech Stack:-
+# 🛠 Tech Stack:
 
 ## Backend:-
 
