@@ -50,7 +50,7 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 * FAISS Vector Database
 * Sentence Transformers
 
-## Database:-
+## Database:
 
 * PostgreSQL
 
