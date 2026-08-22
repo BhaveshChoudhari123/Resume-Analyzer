@@ -60,7 +60,7 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 * CSS
 * Bootstrap
 
-## Authentication & Security:-
+## Authentication & Security:
 
 * Email OTP Verification
 * Password Reset via OTP
