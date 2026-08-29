@@ -9,7 +9,7 @@ An AI-powered Resume Analyzer built using **Django**, **Groq LLM**, **FAISS**, a
 **Website:-**
 https://web-production-1c408.up.railway.app/accounts/login/?next=/
 
-# ✨ Features:
+# ✨ Features:-
 
 * 👤 User Registration & Login
 * 🔐 Forgot Password with Email OTP
