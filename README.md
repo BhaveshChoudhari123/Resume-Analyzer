@@ -54,7 +54,7 @@ https://web-production-1c408.up.railway.app/accounts/login/?next=/
 
 * PostgreSQL
 
-## Frontend:
+## Frontend:-
 
 * HTML
 * CSS
